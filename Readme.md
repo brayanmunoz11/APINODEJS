@@ -11,7 +11,8 @@ Ejecutar en la terminal
 1. cd .\FunctionGETStartWars\
 2. npm i
 3. Run local:
-    3.1. sls offline  
+    3.1  npm install serverless-offline --save-dev
+    3.2. sls offline  
 4. Deploy AWS:
     4.1 sls deploy
 5. Test:
@@ -22,6 +23,7 @@ Ejecutar en la terminal
 1. cd .\FunctionPOSTStarWars\
 2. npm i
 3. Run local:
+    3.1  npm install serverless-offline --save-dev
     3.1. sls offline --httpPort 4000 --lambdaPort 4002
 4. Deploy AWS:
     4.1 sls deploy
