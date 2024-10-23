@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.1691.0",
+    "axios": "^1.7.7",
+    "jest": "^29.7.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^14.3.3"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}

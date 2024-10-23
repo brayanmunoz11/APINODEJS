@@ -1,0 +1,37 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: bmunoz
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: FunctionPOSTStarWars
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region:   us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: 
+        - arn:aws:dynamodb:us-east-1:597088034382:table/StarWarsPeople
+
+custom:
+  serverless-offline:
+    httpPort: 4000
+    websocketPort: 4001
+    lambdaPort: 4002
+    albPort: 4003
+
+plugins:
+  - serverless-offline
+  
+
+functions:
+  createPeople:
+    handler: handler.createPeople
+    timeout: 30
+    events:
+      - httpApi:
+          path: /people
+          method: post

@@ -1,0 +1,49 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: bmunoz
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: FunctionGETStartWars
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region:   us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: 
+        - arn:aws:dynamodb:us-east-1:597088034382:table/StarWarsPeople
+
+custom:
+  serverless-offline:
+    httpPort: 3000
+    websocketPort: 3001
+    lambdaPort: 3002
+    albPort: 3003
+    
+plugins:
+  - serverless-offline
+
+
+
+functions:
+  getStarWars:
+    handler: handler.getStarWars
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+  getStarWarsPeopleById:
+    handler: handler.getStarWarsPeopleById
+    timeout: 30
+    events:
+      - httpApi:
+          path: /people/{id}
+          method: get
+          request:
+            parameters:
+              querystrings:
+                type: true
